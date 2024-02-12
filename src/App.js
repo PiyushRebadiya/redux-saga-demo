@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+  const data = useSelector(state => state);
+  console.log('data===>>>>>', data)
+  const count = useSelector(state => state.count.count);
+  console.log('count', count)
+  const dispatch = useDispatch();
+
+  const incrementAsync = () => {
+    dispatch({ type: 'API_CALL_ASYNC' });
+  };
+
+  const decrement = () => {
+    dispatch({ type: 'DECREMENT' });
+  };
+  const increment = () => {
+    dispatch({ type: 'INCREMENT' });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>Count: {count}</div>
+      <br />
+      <button onClick={incrementAsync}>API CALL</button>
+      <br />
+      <br />
+      <button onClick={decrement}>Decrement</button>
+      <br />
+      <br />
+      <button onClick={increment}>increment</button>
     </div>
   );
 }
